@@ -547,3 +547,42 @@ header > *:not(.firefly-container) {
     bottom: 8px;
   }
 }
+/* ===============================
+   MOBILE HEADER HEIGHT & ALIGN FIX
+================================ */
+@media (max-width: 768px) {
+
+  header {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;   /* 🔴 STOP vertical centering */
+    align-items: center;
+    padding: 8px 15px;             /* 🔽 reduce height */
+    gap: 6px;                      /* small space only */
+  }
+
+  header img {
+    max-width: 120px;
+    margin: 0;
+  }
+
+  nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;                     /* 🔴 remove extra space */
+    padding: 0;
+  }
+
+  header nav a {
+    font-size: 0.9rem;
+    padding: 4px 6px;
+  }
+}
+@media (max-width: 768px) {
+  header {
+    min-height: unset;
+    height: auto;
+  }
+}
