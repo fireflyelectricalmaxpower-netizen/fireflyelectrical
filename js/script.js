@@ -255,8 +255,38 @@ menuToggle.addEventListener("click", () => {
 
     toggle.innerHTML = open ? "✖" : "☰";
   });
+let touchStartX = 0;
+let touchEndX = 0;
+
+const slider = document.querySelector(".backg");
+
+slider.addEventListener("touchstart", (e) => {
+  touchStartX = e.changedTouches[0].screenX;
+});
+
+slider.addEventListener("touchend", (e) => {
+  touchEndX = e.changedTouches[0].screenX;
+  handleSwipe();
+});
+
+function handleSwipe() {
+  const swipeThreshold = 50; // minimum swipe distance
+
+  if (touchEndX < touchStartX - swipeThreshold) {
+    // 👉 Swipe Left (Next Slide)
+    goToSlide((imageIndex + 1) % images.length);
+    resetInterval();
+  }
+
+  if (touchEndX > touchStartX + swipeThreshold) {
+    // 👈 Swipe Right (Previous Slide)
+    goToSlide((imageIndex - 1 + images.length) % images.length);
+    resetInterval();
+  }
+}
 
 
 
   window.addEventListener("scroll", revealSections);
   window.addEventListener("load", revealSections);
+
