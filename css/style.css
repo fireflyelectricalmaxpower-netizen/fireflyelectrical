@@ -677,5 +677,31 @@ header > *:not(.firefly-container) {
     display: flex;
   }
 }
+/* ===============================
+   HEADER PROPER ALIGNMENT
+================================ */
+
+header {
+  display: flex;
+  justify-content: space-between;  /* pushes left & right */
+  align-items: center;
+  padding: 10px 20px;
+}
+
+/* Logo left */
+header img {
+  margin: 0;
+}
+
+/* Hamburger right (mobile only) */
+.menu-toggle {
+  margin-left: auto;
+}
+
+/* Desktop nav on right */
+nav {
+  margin-left: auto;
+}
+
 
 
