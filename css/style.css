@@ -667,4 +667,50 @@ nav {
     padding: 4px 6px;
   }
 }
+/* ===============================
+   MOBILE HAMBURGER MENU
+================================ */
+
+/* Hide menu icon on desktop */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #ebf00e;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+    position: absolute;
+    right: 20px;
+    top: 15px;
+    z-index: 1000;
+  }
+
+  nav {
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 220px;
+    background: #111;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px 0;
+    gap: 20px;
+    display: none;   /* hidden by default */
+    border-radius: 0 0 0 15px;
+  }
+
+  nav a {
+    color: #fff;
+    font-size: 1rem;
+  }
+
+  nav.active {
+    display: flex;
+  }
+}
 
