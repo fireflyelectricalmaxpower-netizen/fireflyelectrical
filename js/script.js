@@ -14,12 +14,30 @@
 
 
 
-const images = [
-  "images/bg1.jpg",
-  "images/bg2.jpg",
-  "images/bg3.jpg",
-  "images/bg4.jpg"
-];
+function getImages() {
+  if (window.innerWidth <= 768) {
+    return [
+      "css/images/mbg1.jpg",
+      "css/images/mbg2.jpg",
+      "css/images/mbg3.jpg",
+      "css/images/mbg4.jpg",
+    ];
+  } else {
+    return [
+      "images/bg1.jpg",
+      "images/bg2.jpg",
+      "images/bg3.jpg",
+      "images/bg4.jpg",
+    ];
+  }
+}
+
+let images = getImages();
+
+window.addEventListener("resize", () => {
+  images = getImages();
+});
+
 
 const slides = document.querySelectorAll(".slide");
 const dotsContainer = document.querySelector(".slider-dots");
@@ -218,6 +236,27 @@ const navMenu = document.getElementById("navMenu");
 menuToggle.addEventListener("click", () => {
   navMenu.classList.toggle("active");
 });
+
+
+  const toggle = document.getElementById("menuToggle");
+  const nav = document.getElementById("navMenu");
+
+  toggle.addEventListener("click", () => {
+    const isOpen = toggle.classList.toggle("active");
+    nav.classList.toggle("active");
+
+    // FORCE icon change
+    toggle.innerHTML = isOpen ? "&#10005;" : "&#9776;";
+  });
+
+
+  toggle.addEventListener("click", () => {
+    const open = nav.classList.toggle("active");
+
+    toggle.innerHTML = open ? "✖" : "☰";
+  });
+
+
 
   window.addEventListener("scroll", revealSections);
   window.addEventListener("load", revealSections);
