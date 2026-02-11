@@ -280,26 +280,9 @@ footer {
 .slide.active {
   opacity: 1;
 }
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .backg {
-    height: 60vh;          /* better mobile height */
-    min-height: 300px;
-  }
-
-  .slide {
-    background-size: cover;     /* 🔥 IMPORTANT */
-    background-position: center center;
-    background-repeat: no-repeat;
-  }
-
-}
 .slide {
   background-position: center top;
 }
-
 
 /* DOTS NAVIGATION */
 .slider-dots {
@@ -361,7 +344,6 @@ footer {
 
 header {
   position: relative;
-  overflow: hidden;
 }
 
 /* Container */
@@ -508,7 +490,6 @@ header > *:not(.firefly-container) {
   header {
     position: relative;
     z-index: 20;
-    flex-direction: column;
   }
 
   nav {
@@ -518,17 +499,21 @@ header > *:not(.firefly-container) {
   }
 
   /* BACKGROUND SLIDER */
-  .backg {
-    position: relative;
-    height: calc(100vh - 120px); /* subtract header height */
-    min-height: 280px;
-  }
+.backg {
+  position: relative;
+  width: 100%;
+  height: 100svh; /* Full screen */
+  overflow: hidden;
+}
 
-  .slide {
-    background-size: contain;
-    background-position: center;
-    background-color: #000;
-  }
+.slide {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: opacity 1.5s ease-in-out;
+}
 
   /* HERO CONTENT */
   .hero {
@@ -553,7 +538,6 @@ header > *:not(.firefly-container) {
 
   header {
     display: flex;
-    flex-direction: column;
     justify-content: flex-start;   /* 🔴 STOP vertical centering */
     padding: 8px 15px;             /* 🔽 reduce height */
     gap: 6px;                      /* small space only */
@@ -633,12 +617,6 @@ header > *:not(.firefly-container) {
 ================================ */
 
 /* Keep desktop layout on all screens */
-header {
-  flex-direction: row !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  flex-wrap: nowrap !important;
-}
 
 /* Nav stays inline */
 nav {
@@ -680,7 +658,6 @@ nav {
 
   .menu-toggle {
     display: block;
-    position: absolute;
     right: 20px;
     top: 15px;
     z-index: 1000;
@@ -716,7 +693,6 @@ nav {
 header {
   display: flex;
   justify-content: space-between;  /* pushes left & right */
-  align-items: center;
   padding: 10px 20px;
 }
 
@@ -733,5 +709,266 @@ header img {
 /* Desktop nav on right */
 nav {
   margin-left: auto;
+}
+/* ===============================
+   CLEAN HEADER LAYOUT (FINAL)
+================================ */
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 20px;
+  position: relative;
+}
+
+/* Logo always left */
+header img {
+  display: block;
+  max-width: 130px;
+}
+
+/* Desktop nav right */
+#navMenu {
+  display: flex;
+  gap: 20px;
+  margin-left: auto;
+}
+
+/* Hamburger hidden on desktop */
+.menu-toggle {
+  display: none;
+  font-size: 28px;
+  cursor: pointer;
+}
+/* ===============================
+   MOBILE
+================================ */
+
+@media (max-width: 768px) {
+
+  /* Show hamburger */
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+  /* Hide nav by default */
+  #navMenu {
+    display: none;
+    position: absolute;
+    top: 60px;
+    right: 0;
+    width: 220px;
+    background: #111;
+    flex-direction: column;
+    padding: 20px;
+    border-radius: 0 0 0 15px;
+  }
+
+  #navMenu.active {
+    display: flex;
+  }
+}
+/* ===============================
+   FINAL HEADER ALIGN FIX
+================================ */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;   /* vertical center */
+  padding: 10px 20px;
+}
+
+/* Logo */
+header img {
+  display: block;
+  max-height: 50px;
+}
+
+/* Hamburger */
+.menu-toggle {
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* Desktop nav */
+#navMenu {
+  display: flex;
+  gap: 20px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  #navMenu {
+    display: none;
+  }
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;   /* pushes to right */
+  }
+}
+/* ===============================
+   HARD RESET HEADER ALIGNMENT
+================================ */
+
+header {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  align-items: center !important;
+  padding: 10px 20px !important;
+}
+
+/* Remove absolute positioning if exists */
+.menu-toggle {
+  position: static !important;
+  display: none;
+  font-size: 26px;
+  cursor: pointer;
+}
+
+/* Desktop nav */
+#navMenu {
+  display: flex;
+  gap: 20px;
+}
+
+/* MOBILE */
+@media (max-width: 768px) {
+
+  .menu-toggle {
+    display: block;
+    margin-left: auto;
+  }
+
+}
+.menu-toggle {
+  font-size: 28px;
+  cursor: pointer;
+  color: #ebf00e;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.menu-toggle.active {
+  transform: rotate(180deg) scale(1.1);
+  color: #ffffff;
+}
+/* ===============================
+   MOBILE HAMBURGER MENU BOX
+================================ */
+
+/* Desktop */
+#navMenu {
+  display: flex;
+  gap: 20px;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+
+  #navMenu {
+    display: none;
+    position: absolute;
+    top: 65px;
+    right: 15px;
+    width: 240px;
+    background: linear-gradient(180deg, #111, #000);
+    border-radius: 18px;
+    padding: 25px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.7);
+    animation: menuDrop 0.35s ease;
+    z-index: 1000;
+  }
+
+  #navMenu.active {
+    display: flex;
+  }
+
+  #navMenu a {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 500;
+    position: relative;
+  }
+
+  #navMenu a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -6px;
+    width: 0;
+    height: 2px;
+    background: #ebf00e;
+    transition: 0.3s;
+  }
+
+  #navMenu a:hover::after {
+    width: 100%;
+  }
+}
+
+@keyframes menuDrop {
+  from {
+    opacity: 0;
+    transform: translateY(-12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+/* ===============================
+   FINAL MOBILE HAMBURGER MENU
+================================ */
+
+@media (max-width: 768px) {
+
+  #navMenu {
+    display: none;
+    position: absolute;
+    top: 70px;
+    right: 15px;
+    width: 240px;
+    background: linear-gradient(180deg, #111, #000);
+    border-radius: 18px;
+    padding: 25px 0;
+    flex-direction: column;
+    align-items: center;
+    gap: 18px;
+    box-shadow: 0 20px 45px rgba(0,0,0,0.7);
+    z-index: 9999;   /* 🔥 IMPORTANT */
+  }
+
+  #navMenu.active {
+    display: flex;
+  }
+
+  #navMenu a {
+    color: #ffffff;
+    font-size: 1rem;
+    font-weight: 500;
+  }
+}
+@media (max-width: 768px) {
+
+  header {
+    padding-bottom: 6px;
+  }
+
+  .backg {
+    margin-top: -12px; /* tighter on mobile */
+  }
+
+  .hero {
+    padding-top: 10px;
+  }
 }
 
