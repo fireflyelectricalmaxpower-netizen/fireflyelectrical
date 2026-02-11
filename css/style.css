@@ -631,42 +631,6 @@ header > *:not(.firefly-container) {
   }
 }
 
-
-/* ===============================
-   FORCE DESKTOP HEADER ON MOBILE
-================================ */
-
-/* Keep desktop layout on all screens */
-header {
-  flex-direction: row !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  flex-wrap: nowrap !important;
-}
-
-/* Nav stays inline */
-nav {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 16px;
-  white-space: nowrap;
-}
-
-/* Reduce nav text size slightly on mobile */
-@media (max-width: 768px) {
-  header {
-    padding: 8px 10px;
-  }
-
-  header img {
-    max-width: 110px;
-  }
-
-  nav a {
-    font-size: 0.85rem;
-    padding: 4px 6px;
-  }
-}
 /* ===============================
    MOBILE HAMBURGER MENU
 ================================ */
@@ -713,4 +677,5 @@ nav {
     display: flex;
   }
 }
+
 
