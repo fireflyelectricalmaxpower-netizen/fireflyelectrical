@@ -284,16 +284,23 @@ footer {
 
 /* MOBILE */
 @media (max-width: 768px) {
+
   .backg {
-    height: 40vh;
-    min-height: 260px;
+    height: 60vh;          /* better mobile height */
+    min-height: 300px;
   }
 
   .slide {
-    background-size: contain;
-    background-color: #000;
+    background-size: cover;     /* 🔥 IMPORTANT */
+    background-position: center center;
+    background-repeat: no-repeat;
   }
+
 }
+.slide {
+  background-position: center top;
+}
+
 
 /* DOTS NAVIGATION */
 .slider-dots {
