@@ -33,6 +33,15 @@ nav {
   display: none;
 }
  header { background: #ffffff; color: #ffffff;border-bottom:4px solid #ffffff; }
+ header {
+  position: relative;
+  z-index: 1000;
+}
+
+.backg {
+  position: relative;
+  z-index: 1;
+}
 
 
 /* MOBILE FIX */
@@ -722,11 +731,31 @@ header > *:not(.firefly-container) {
   }
 
 }
-@media (max-width: 768px) {
-  .backg {
-    height: 100svh;   /* iOS-safe viewport */
+/* =========================
+   iOS SAFARI HEADER FIX ONLY
+========================= */
+@supports (-webkit-touch-callout: none) {
+
+  header {
+    position: fixed;
+    top: env(safe-area-inset-top);
+    left: 0;
+    width: 100%;
+    z-index: 9999;
   }
+
+  .menu-toggle {
+    position: relative;
+    z-index: 10000;
+  }
+
+  .backg {
+    margin-top: 64px;
+  }
+
 }
+
+
 
 
 
