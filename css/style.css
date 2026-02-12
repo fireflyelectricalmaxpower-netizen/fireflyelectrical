@@ -2,22 +2,38 @@
     * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'robot', sans-serif; }
     body { line-height: 1.6; color: #1e3d59; }
     a { text-decoration: none; color: inherit; }
-    header {
+/* =========================
+   CLEAN HEADER LAYOUT
+========================= */
+
+header {
   display: flex;
+  align-items: center;      /* vertical center */
   justify-content: space-between;
-  padding: 10px 15px;
-  flex-wrap: wrap;
+  padding: 12px 20px;
+  position: relative;
+  border-bottom: 5px #fff;
 }
 
+/* Logo */
 header img {
-  max-width: 150px;
-  height: auto;
+  max-height: 50px;
+  display: block;
 }
 
+/* Desktop nav */
 nav {
   display: flex;
-  gap: 12px;
+  gap: 25px;
+  margin-left: auto;
 }
+
+/* Hide hamburger on desktop */
+.menu-toggle {
+  display: none;
+}
+ header { background: #ffffff; color: #ffffff;border-bottom:4px solid #ffffff; }
+
 
 /* MOBILE FIX */
 @media (max-width: 768px) {
@@ -27,10 +43,6 @@ nav {
     margin-top: 10px;
   }
 }
-
-    /* Header */
-    header { background: #ffffff; color: #ffffff; padding: 10px 50px; display: flex; justify-content: space-between;border-bottom:4px solid #ffffff; }
-    header nav a { margin-left: 20px; color: #241b1b; font-weight: bold; }
 
     /* Hero Section */
    .hero {
@@ -338,6 +350,10 @@ footer {
   opacity: 1 !important;
   transform: none !important;
 }
+.backg {
+  touch-action: pan-y;
+}
+
 /* ===============================
    FIREFLY HEADER ANIMATION
 ================================ */
@@ -376,6 +392,10 @@ header {
     transform: translate(var(--x), var(--y));
   }
 }
+html {
+  scroll-behavior: smooth;
+}
+
 
 /* Glow pulse */
 @keyframes glowPulse {
@@ -531,43 +551,7 @@ header > *:not(.firefly-container) {
     bottom: 8px;
   }
 }
-/* ===============================
-   MOBILE HEADER HEIGHT & ALIGN FIX
-================================ */
-@media (max-width: 768px) {
 
-  header {
-    display: flex;
-    justify-content: flex-start;   /* 🔴 STOP vertical centering */
-    padding: 8px 15px;             /* 🔽 reduce height */
-    gap: 6px;                      /* small space only */
-  }
-
-  header img {
-    max-width: 120px;
-    margin: 0;
-  }
-
-  nav {
-    width: 100%;
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 0;                     /* 🔴 remove extra space */
-    padding: 0;
-  }
-
-  header nav a {
-    font-size: 0.9rem;
-    padding: 4px 6px;
-  }
-}
-@media (max-width: 768px) {
-  header {
-    min-height: unset;
-    height: auto;
-  }
-}
 /* ===============================
    HERO HEIGHT REDUCE
 ================================ */
@@ -611,364 +595,122 @@ header > *:not(.firefly-container) {
   }
 }
 
-
 /* ===============================
-   FORCE DESKTOP HEADER ON MOBILE
+   TESLA / APPLE GLASS MENU
 ================================ */
 
-/* Keep desktop layout on all screens */
-
-/* Nav stays inline */
-nav {
-  display: flex !important;
-  flex-direction: row !important;
-  gap: 16px;
-  white-space: nowrap;
-}
-
-/* Reduce nav text size slightly on mobile */
 @media (max-width: 768px) {
-  header {
-    padding: 8px 10px;
-  }
-
-  header img {
-    max-width: 110px;
-  }
-
-  nav a {
-    font-size: 0.85rem;
-    padding: 4px 6px;
-  }
-}
-/* ===============================
-   MOBILE HAMBURGER MENU
-================================ */
-
-/* Hide menu icon on desktop */
-.menu-toggle {
-  display: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #ebf00e;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-
-  .menu-toggle {
-    display: block;
-    right: 20px;
-    top: 15px;
-    z-index: 1000;
-  }
 
   nav {
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 220px;
-    background: #111;
-    flex-direction: column;
-    align-items: center;
-    padding: 20px 0;
-    gap: 20px;
-    display: none;   /* hidden by default */
-    border-radius: 0 0 0 15px;
+    display: none;
   }
+  
 
-  nav a {
-    color: #fff;
-    font-size: 1rem;
-  }
+  #navMenu {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 280px;
+    border-top-left-radius: 45px;
+    border-bottom-left-radius: 45px;
 
-  nav.active {
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding-left: 40px;
+    gap: 35px;
+
+    background: rgba(36, 36, 36, 0.75);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    transition: right 0.5s cubic-bezier(.77,0,.18,1);
+    z-index: 9999;
+  }
+
+  #navMenu a {
+    font-size: 1.2rem;
+    font-weight: 500;
+    color: #ffffff;
+    letter-spacing: 1px;
+    transition: opacity 0.3s ease;
+  }
+
+  #navMenu a:hover {
+    opacity: 0.6;
+  }
+
+  #navMenu.active {
+    right: 0;
+  }
+
+  .menu-toggle {
+    display: flex;
+    margin-left: auto;
   }
 }
-/* ===============================
-   HEADER PROPER ALIGNMENT
-================================ */
 
-header {
-  display: flex;
-  justify-content: space-between;  /* pushes left & right */
-  padding: 10px 20px;
-}
 
-/* Logo left */
-header img {
-  margin: 0;
-}
-
-/* Hamburger right (mobile only) */
-.menu-toggle {
-  margin-left: auto;
-}
-
-/* Desktop nav on right */
-nav {
-  margin-left: auto;
+.menu-overlay.active {
+  opacity: 1;
+  pointer-events: auto;   /* only active when visible */
 }
 /* ===============================
-   CLEAN HEADER LAYOUT (FINAL)
+   APPLE STYLE HAMBURGER
 ================================ */
 
-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 10px 20px;
-  position: relative;
-}
-
-/* Logo always left */
-header img {
-  display: block;
-  max-width: 130px;
-}
-
-/* Desktop nav right */
-#navMenu {
-  display: flex;
-  gap: 20px;
-  margin-left: auto;
-}
-
-/* Hamburger hidden on desktop */
 .menu-toggle {
+  width: 26px;
+  height: 18px;
   display: none;
-  font-size: 28px;
+  flex-direction: column;
+  justify-content: space-between;
   cursor: pointer;
+  z-index: 10001;
 }
-/* ===============================
-   MOBILE
-================================ */
+
+.menu-toggle span {
+  height: 2px;
+  width: 100%;
+  background: #ebf00e;
+  border-radius: 2px;
+  transition: all 0.4s cubic-bezier(.77,0,.18,1);
+}
+
+/* Animation to X */
+.menu-toggle.active span:nth-child(1) {
+  transform: translateY(8px) rotate(45deg);
+}
+
+.menu-toggle.active span:nth-child(2) {
+  transform: translateY(-8px) rotate(-45deg);
+}
+
+
+/* =========================
+   MOBILE HEADER FIX
+========================= */
 
 @media (max-width: 768px) {
+
+  /* Hide desktop nav */
+  nav {
+    display: none;
+  }
 
   /* Show hamburger */
   .menu-toggle {
-    display: block;
-    margin-left: auto;
-  }
-
-  /* Hide nav by default */
-  #navMenu {
-    display: none;
-    position: absolute;
-    top: 60px;
-    right: 0;
-    width: 220px;
-    background: #111;
-    flex-direction: column;
-    padding: 20px;
-    border-radius: 0 0 0 15px;
-  }
-
-  #navMenu.active {
     display: flex;
-  }
-}
-/* ===============================
-   FINAL HEADER ALIGN FIX
-================================ */
-
-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;   /* vertical center */
-  padding: 10px 20px;
-}
-
-/* Logo */
-header img {
-  display: block;
-  max-height: 50px;
-}
-
-/* Hamburger */
-.menu-toggle {
-  display: none;
-  font-size: 26px;
-  cursor: pointer;
-}
-
-/* Desktop nav */
-#navMenu {
-  display: flex;
-  gap: 20px;
-}
-
-/* Mobile */
-@media (max-width: 768px) {
-
-  #navMenu {
-    display: none;
-  }
-
-  .menu-toggle {
-    display: block;
-    margin-left: auto;   /* pushes to right */
-  }
-}
-/* ===============================
-   HARD RESET HEADER ALIGNMENT
-================================ */
-
-header {
-  display: flex !important;
-  flex-direction: row !important;
-  justify-content: space-between !important;
-  align-items: center !important;
-  padding: 10px 20px !important;
-}
-
-/* Remove absolute positioning if exists */
-.menu-toggle {
-  position: static !important;
-  display: none;
-  font-size: 26px;
-  cursor: pointer;
-}
-
-/* Desktop nav */
-#navMenu {
-  display: flex;
-  gap: 20px;
-}
-
-/* MOBILE */
-@media (max-width: 768px) {
-
-  .menu-toggle {
-    display: block;
-    margin-left: auto;
+    margin-left: auto;   /* pushes it right */
   }
 
 }
-.menu-toggle {
-  font-size: 28px;
-  cursor: pointer;
-  color: #ebf00e;
-  transition: transform 0.3s ease, color 0.3s ease;
-}
 
-.menu-toggle.active {
-  transform: rotate(180deg) scale(1.1);
-  color: #ffffff;
-}
-/* ===============================
-   MOBILE HAMBURGER MENU BOX
-================================ */
 
-/* Desktop */
-#navMenu {
-  display: flex;
-  gap: 20px;
-}
 
-/* Mobile */
-@media (max-width: 768px) {
 
-  #navMenu {
-    display: none;
-    position: absolute;
-    top: 65px;
-    right: 15px;
-    width: 240px;
-    background: linear-gradient(180deg, #111, #000);
-    border-radius: 18px;
-    padding: 25px 0;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.7);
-    animation: menuDrop 0.35s ease;
-    z-index: 1000;
-  }
 
-  #navMenu.active {
-    display: flex;
-  }
 
-  #navMenu a {
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 500;
-    position: relative;
-  }
-
-  #navMenu a::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    bottom: -6px;
-    width: 0;
-    height: 2px;
-    background: #ebf00e;
-    transition: 0.3s;
-  }
-
-  #navMenu a:hover::after {
-    width: 100%;
-  }
-}
-
-@keyframes menuDrop {
-  from {
-    opacity: 0;
-    transform: translateY(-12px) scale(0.96);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-/* ===============================
-   FINAL MOBILE HAMBURGER MENU
-================================ */
-
-@media (max-width: 768px) {
-
-  #navMenu {
-    display: none;
-    position: absolute;
-    top: 70px;
-    right: 15px;
-    width: 240px;
-    background: linear-gradient(180deg, #111, #000);
-    border-radius: 18px;
-    padding: 25px 0;
-    flex-direction: column;
-    align-items: center;
-    gap: 18px;
-    box-shadow: 0 20px 45px rgba(0,0,0,0.7);
-    z-index: 9999;   /* 🔥 IMPORTANT */
-  }
-
-  #navMenu.active {
-    display: flex;
-  }
-
-  #navMenu a {
-    color: #ffffff;
-    font-size: 1rem;
-    font-weight: 500;
-  }
-}
-@media (max-width: 768px) {
-
-  header {
-    padding-bottom: 6px;
-  }
-
-  .backg {
-    margin-top: -12px; /* tighter on mobile */
-  }
-
-  .hero {
-    padding-top: 10px;
-  }
-}
 
