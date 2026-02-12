@@ -429,11 +429,6 @@ html {
   }
 }
 
-/* Keep header content above animation */
-header > *:not(.firefly-container) {
-  position: relative;
-  z-index: 2;
-}
 /* CATEGORIES SECTION FIX */
 .catalogs {
   position: relative;
@@ -746,6 +741,28 @@ header > *:not(.firefly-container) {
   .menu-toggle {
     display: flex;
     margin-left: auto;   /* pushes it right */
+  }
+
+}
+/* FORCE MENU ABOVE HEADER ON iPHONE */
+@media (max-width: 768px) {
+
+  header {
+    transform: none !important;
+    overflow: visible !important;
+  }
+
+  #navMenu {
+    position: fixed !important;
+    top: 0;
+    right: -100%;
+    height: 100vh;
+    width: 280px;
+    z-index: 999999 !important;
+  }
+
+  #navMenu.active {
+    right: 0;
   }
 
 }
