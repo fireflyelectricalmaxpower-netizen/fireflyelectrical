@@ -1,4 +1,6 @@
- const sections = document.querySelectorAll("section");
+ 
+const sections = document.querySelectorAll("section");
+const loader = document.getElementById("loader");
 
   function revealSections() {
     const triggerBottom = window.innerHeight * 0.85;
@@ -230,31 +232,54 @@ startInterval();
 
     container.appendChild(f);
   }
-const menuToggle = document.getElementById("menuToggle");
-const navMenu = document.getElementById("navMenu");
+document.addEventListener("DOMContentLoaded", function () {
 
-menuToggle.addEventListener("click", () => {
-  navMenu.classList.toggle("active");
+  const menuToggle = document.getElementById("menuToggle");
+  const navMenu = document.getElementById("navMenu");
+  const overlay = document.getElementById("menuOverlay");
+
+  function openMenu() {
+    navMenu.classList.add("active");
+    menuToggle.classList.add("active");
+    overlay.classList.add("active");
+    document.body.style.overflow = "hidden";
+  }
+
+  function closeMenu() {
+    navMenu.classList.remove("active");
+    menuToggle.classList.remove("active");
+    overlay.classList.remove("active");
+    document.body.style.overflow = "";
+  }
+
+  menuToggle.addEventListener("click", function (e) {
+    e.stopPropagation();  // 🔥 important
+    navMenu.classList.contains("active") ? closeMenu() : openMenu();
+  });
+
+  overlay.addEventListener("click", closeMenu);
+
+  document.addEventListener("click", function (e) {
+
+    const isClickInsideMenu = navMenu.contains(e.target);
+    const isClickOnToggle = menuToggle.contains(e.target);
+
+    if (!isClickInsideMenu && !isClickOnToggle) {
+      closeMenu();
+    }
+
+  });
+
+  document.querySelectorAll("#navMenu a").forEach(link => {
+    link.addEventListener("click", closeMenu);
+  });
+
 });
 
 
-  const toggle = document.getElementById("menuToggle");
-  const nav = document.getElementById("navMenu");
-
-  toggle.addEventListener("click", () => {
-    const isOpen = toggle.classList.toggle("active");
-    nav.classList.toggle("active");
-
-    // FORCE icon change
-    toggle.innerHTML = isOpen ? "&#10005;" : "&#9776;";
-  });
 
 
-  toggle.addEventListener("click", () => {
-    const open = nav.classList.toggle("active");
 
-    toggle.innerHTML = open ? "✖" : "☰";
-  });
 let touchStartX = 0;
 let touchEndX = 0;
 
@@ -289,4 +314,3 @@ function handleSwipe() {
 
   window.addEventListener("scroll", revealSections);
   window.addEventListener("load", revealSections);
-
