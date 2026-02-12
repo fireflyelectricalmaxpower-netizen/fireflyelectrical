@@ -637,13 +637,17 @@ html {
     padding-left: 40px;
     gap: 35px;
 
-    background: rgba(36, 36, 36, 0.75);
-    backdrop-filter: blur(20px);
+    background: rgba(20,20,20,0.96);
+backdrop-filter: blur(6px);
     -webkit-backdrop-filter: blur(20px);
 
-    transition: right 0.5s cubic-bezier(.77,0,.18,1);
+      transform: translateX(100%);
+  transition: transform 0.4s cubic-bezier(.77,0,.18,1);
+  will-change: transform;
     z-index: 9999;
   }
+
+
 
   #navMenu a {
     font-size: 1.2rem;
@@ -658,8 +662,8 @@ html {
   }
 
   #navMenu.active {
-    right: 0;
-  }
+  transform: translateX(0);
+}
 
   .menu-toggle {
     display: flex;
