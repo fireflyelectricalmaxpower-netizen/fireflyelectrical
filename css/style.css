@@ -770,6 +770,10 @@ backdrop-filter: blur(6px);
   }
 
 }
+html, body {
+  overflow-x: hidden;
+}
+
 
 
 
