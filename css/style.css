@@ -601,10 +601,6 @@ html {
   }
 }
 @media (max-width: 768px) {
-  header {
-    overflow-x: auto;
-  }
-
   header::-webkit-scrollbar {
     display: none;
   }
@@ -773,7 +769,6 @@ backdrop-filter: blur(6px);
 html, body {
   overflow-x: hidden;
 }
-
 
 
 
