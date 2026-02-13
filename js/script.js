@@ -314,4 +314,3 @@ function handleSwipe() {
 
   window.addEventListener("scroll", revealSections);
   window.addEventListener("load", revealSections);
-
