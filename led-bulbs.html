@@ -12,11 +12,24 @@
 
 <body>
 
-<header>
-  <a href="index.html">← Back</a>
-  <strong>LED Bulbs</strong>
-</header>
+<header class="main-header">
 
+  <div class="header-left">
+    <a href="index.html">← Back</a>
+  </div>
+
+  <div class="header-center">
+    <strong>LED Bulbs</strong>
+  </div>
+
+  <div class="header-right">
+    <div class="cart-icon" id="cartIcon">
+      <i class="fa-solid fa-cart-shopping"></i>
+      <span id="cartCount">0</span>
+    </div>
+  </div>
+
+</header>
 <section class="hero">
   <div>
     <h1>Quality <span>LED Bulbs</span></h1>
@@ -54,7 +67,7 @@
       <p>B22-DL</p>
       <p>Bright • Energy Saving • Long Life</p>
       <div class="meta">
-        <span class="price">Rs.000.00</span>
+        <span class="price">Rs.5200.00</span>
         <button>Buy Now</button>
         <button class="cart-btn"><i class="fa-solid fa-cart-shopping"></i></button>
       </div>
@@ -63,7 +76,7 @@
 
 
       <div class="card" data-category="high">
-    <img src="led.png" alt="LED 9W">
+    <img src="ledimages/40W .png" alt="LED 9W">
     <div class="card-content">
       <h3>LED Bulb 40W</h3>
       <p>Brand- Mades</p>
@@ -452,12 +465,37 @@
   </div>
   </div>
 
+
+  <div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3>Your Cart</h3>
+    <button id="closeCart" class="close-btn">
+  <i class="fa-solid fa-xmark"></i>
+</button>
+
+  </div>
+
+  <div class="cart-items" id="cartItems"></div>
+
+  <div class="cart-footer">
+    <button id="clearCart" class="clear-btn">Clear Cart</button>
+    <button class="checkout-btn">Checkout</button>
+    <p id="cartTotal">Total: Rs. 0000.00</p>
+  </div>
+</div>
+
   
 </section>
 
 <footer>
   © 2025 Firefly Electrical
 </footer>
+<div class="toast" id="toast">
+  <i class="fa-solid fa-circle-check"></i>
+  <span id="toastText">Added to Cart</span>
+</div>
+
+
 <script src="led js/script.js"></script>
 
 </body>
