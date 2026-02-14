@@ -245,3 +245,37 @@ footer {
       url("mbg1.jpg") !important;
   }
 }
+/* LOADING SKELETON */
+.loading {
+  grid-column: 1 / -1;
+  grid-template-columns: repeat(5, minmax(220px, 1fr));
+  gap: 30px;
+}
+.loading {
+  display: none ;
+}
+.loading.show {
+  display: grid ;
+}
+
+.skeleton-card {
+  height: 300px;
+  border-radius: 20px;
+  background: linear-gradient(
+    90deg,
+    #1a1a1a 25%,
+    #2a2a2a 50%,
+    #1a1a1a 75%
+  );
+  background-size: 200% 100%;
+  animation: loadingShimmer 2.2s infinite;
+}
+
+@keyframes loadingShimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
