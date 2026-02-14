@@ -247,15 +247,43 @@ footer {
 }
 /* LOADING SKELETON */
 .loading {
+  display: none;
   grid-column: 1 / -1;
-  grid-template-columns: repeat(5, minmax(220px, 1fr));
   gap: 30px;
 }
+/* Default Desktop */
+.loading.show {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(220px, 1fr));
+}
+
+/* Tablet */
+@media (max-width: 1200px) {
+  .loading.show {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+/* Large Phones */
+@media (max-width: 768px) {
+  .loading.show {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+  .loading.show {
+    grid-template-columns: 1fr;
+  }
+}
+
 .loading {
   display: none ;
 }
 .loading.show {
-  display: grid ;
+  display: grid;
+  grid-template-columns: inherit;
 }
 
 .skeleton-card {
