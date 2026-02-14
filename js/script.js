@@ -125,7 +125,7 @@ startInterval();
 
     // Wait so browser shows it
     setTimeout(() => {
-      window.location.href = "indexled.html";
+      window.location.href = "led-bulbs.html";
     }, 1500);
 
   });
@@ -314,3 +314,4 @@ function handleSwipe() {
 
   window.addEventListener("scroll", revealSections);
   window.addEventListener("load", revealSections);
+
