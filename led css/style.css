@@ -307,3 +307,24 @@ footer {
     background-position: -200% 0;
   }
 }
+@media (max-width: 768px) {
+
+  .filters {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    padding: 20px;
+    gap: 10px;
+    scroll-behavior: smooth;
+  }
+
+  .filters::-webkit-scrollbar {
+    display: none; /* hide scrollbar */
+  }
+
+  .filters button {
+    flex: 0 0 auto; /* prevent shrinking */
+    white-space: nowrap;
+  }
+
+}
+
