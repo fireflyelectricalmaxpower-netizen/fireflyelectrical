@@ -538,7 +538,32 @@ button {
   cursor: pointer;
   user-select: none;
 }
+/* BILLING FORM */
+.billing-box {
+  margin-bottom: 15px;
+}
 
+.billing-box h4 {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.billing-box input,
+.billing-box textarea {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.05);
+  color: #fff;
+  outline: none;
+}
+
+.billing-box input::placeholder,
+.billing-box textarea::placeholder {
+  color: #aaa;
+}
 
 /* Flying Image */
 .flying-img {
@@ -565,6 +590,198 @@ button {
   }
 
 }
+/* INVOICE MODAL */
+.invoice-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.7);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 3000;
+}
 
+.invoice-overlay.show {
+  display: flex;
+}
 
+.invoice-box {
+  background: #fff;
+  color: #000;
+  width: 90%;
+  max-width: 700px;
+  border-radius: 12px;
+  padding: 25px;
+}
 
+.invoice-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-header h2 {
+  margin: 0;
+}
+
+.invoice-meta {
+  margin: 15px 0;
+  font-size: 14px;
+}
+
+.invoice-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 15px;
+}
+
+.invoice-table th,
+.invoice-table td {
+  border-bottom: 1px solid #ddd;
+  padding: 10px;
+}
+
+.invoice-summary {
+  margin-top: 15px;
+  text-align: right;
+}
+
+.invoice-summary p {
+  margin: 5px 0;
+}
+
+.grand-total {
+  font-size: 18px;
+  font-weight: bold;
+}
+
+.print-btn {
+  margin-top: 15px;
+  width: 100%;
+  padding: 12px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+/* PRINT ONLY INVOICE */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  .invoice-box, .invoice-box * {
+    visibility: visible;
+  }
+  .invoice-box {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+  }
+}
+/* LOCK & BLUR BACKGROUND WHEN INVOICE OPEN */
+body.invoice-open {
+  overflow: hidden;
+}
+
+body.invoice-open > *:not(.invoice-overlay) {
+  filter: blur(15px) !important;
+  pointer-events: none;
+}
+
+/* Invoice scroll only */
+.invoice-box {
+  max-height: 90vh;
+  overflow-y: auto;
+}
+
+/* Smooth mobile scroll */
+.invoice-box {
+  -webkit-overflow-scrolling: touch;
+}
+/* CART LAYOUT FIX */
+.cart-sidebar {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+/* HEADER */
+.cart-header {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 18px 20px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+/* SCROLL AREA */
+.cart-items {
+  flex: 1;
+  overflow-y: auto;
+  padding: 15px 20px;
+}
+
+/* FOOTER */
+.cart-footer {
+  flex-shrink: 0;
+  padding: 15px 20px;
+  border-top: 1px solid rgba(255,255,255,0.1);
+}
+
+/* BILLING */
+.billing-box h4 {
+  margin-bottom: 10px;
+  font-size: 15px;
+}
+
+.billing-box input,
+.billing-box textarea {
+  width: 100%;
+  margin-bottom: 8px;
+  padding: 10px;
+  border-radius: 8px;
+}
+
+/* TOTALS */
+.cart-totals p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 14px;
+}
+
+.cart-totals hr {
+  margin: 8px 0;
+  opacity: 0.3;
+}
+
+/* BUTTONS */
+.checkout-btn {
+  margin-top: 10px;
+}
+/* CART ACTIONS */
+.cart-actions {
+  display: grid !important;
+  grid-template-columns: 1fr 1fr !important;
+  gap: 10px !important;
+  padding: 15px 20px !important;
+  border-top: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.cart-actions .whatsapp-btn {
+  grid-column: span 2 !important;
+}
+
+/* WhatsApp button style */
+.whatsapp-btn {
+  background: #25D366;
+  color: #000;
+  border: none;
+  padding: 12px;
+  border-radius: 50px;
+  font-weight: bold;
+  cursor: pointer;
+}
