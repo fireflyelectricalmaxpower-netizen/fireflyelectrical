@@ -3,6 +3,33 @@ const cards = document.querySelectorAll(".products .card");
 const loading = document.getElementById("loading");
 const GST_RATE = 0.00;       // 18% GST
 const DISCOUNT_RATE = 0.10; // 10% discount (change anytime)
+function generateInvoiceNumber() {
+
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  const datePart = `${year}${month}${day}`;
+
+  // Get today's counter from localStorage
+  let counter = localStorage.getItem("fireflyInvoiceCounter");
+
+  if (!counter) {
+    counter = 1;
+  } else {
+    counter = parseInt(counter) + 1;
+  }
+
+  localStorage.setItem("fireflyInvoiceCounter", counter);
+
+  const counterPart = String(counter).padStart(4, "0");
+
+  return `FFE-${datePart}-${counterPart}`;
+}
+
+
 filterButtons.forEach(button => {
   button.addEventListener("click", () => {
 
@@ -34,6 +61,7 @@ filterButtons.forEach(button => {
 
   });
 });
+
 const cartButtons = document.querySelectorAll(".cart-btn");
 const cartSidebar = document.getElementById("cartSidebar");
 const cartIcon = document.getElementById("cartIcon");
@@ -212,8 +240,37 @@ checkoutBtn.addEventListener("click", () => {
   document.getElementById("invoiceDate").innerText =
     new Date().toLocaleDateString();
 
-  document.getElementById("invoiceNumber").innerText =
-    Math.floor(Math.random() * 100000);
+document.getElementById("invoiceNumber").innerText =
+  generateInvoiceNumber();
+function generateInvoiceNumber() {
+
+  const today = new Date();
+
+  const year = today.getFullYear();
+  const month = String(today.getMonth() + 1).padStart(2, "0");
+  const day = String(today.getDate()).padStart(2, "0");
+
+  const datePart = `${year}${month}${day}`;
+
+  // Get saved data
+  const savedData = JSON.parse(localStorage.getItem("fireflyInvoiceData"));
+
+  let counter = 1;
+
+  if (savedData && savedData.date === datePart) {
+    counter = savedData.counter + 1;
+  }
+
+  // Save new data
+  localStorage.setItem("fireflyInvoiceData", JSON.stringify({
+    date: datePart,
+    counter: counter
+  }));
+
+  const counterPart = String(counter).padStart(4, "0");
+
+  return `FFE-${datePart}-${counterPart}`;
+}
 
   invoiceItems.innerHTML = "";
 
@@ -244,6 +301,29 @@ checkoutBtn.addEventListener("click", () => {
   document.getElementById("invTotal").innerText = `Rs. ${total.toFixed(2)}`;
 
   invoiceOverlay.classList.add("show");
+  const invoiceNumber = generateInvoiceNumber();
+document.getElementById("invoiceNumber").innerText = invoiceNumber;
+
+const now = new Date();
+const formattedDate = now.toLocaleDateString();
+const formattedTime = now.toLocaleTimeString();
+
+const invoiceData = {
+  invoiceNo: invoiceNumber,
+  date: formattedDate,
+  time: formattedTime,
+  customer: {
+    name: document.getElementById("billName").value,
+    phone: document.getElementById("billPhone").value,
+    address: document.getElementById("billAddress").value + ", " +
+             document.getElementById("billCity").value
+  },
+  items: cart,
+  total: parseFloat(document.getElementById("invoiceTotal").innerText)
+};
+
+saveInvoiceToHistory(invoiceData);
+
 });
 // Close invoice
 document.getElementById("closeInvoice").addEventListener("click", () => {
@@ -300,4 +380,127 @@ document.getElementById("whatsappOrder").addEventListener("click", () => {
     `https://wa.me/94704000400?text=${encodeURIComponent(message)}`;
 
   window.open(whatsappURL, "_blank");
+});
+/* =========================
+   BUY NOW SYSTEM
+========================= */
+
+const buyBtns = document.querySelectorAll(".buy-btn");
+
+const buyModal = document.getElementById("buyNowModal");
+const closeBuyNow = document.getElementById("closeBuyNow");
+
+const buyProductName = document.getElementById("buyProductName");
+const buyProductPrice = document.getElementById("buyProductPrice");
+
+const buyName = document.getElementById("buyName");
+const buyPhone = document.getElementById("buyPhone");
+const buyAddress = document.getElementById("buyAddress");
+const buyCity = document.getElementById("buyCity");
+
+const buyWhatsapp = document.getElementById("buyWhatsapp");
+const buyCheckout = document.getElementById("buyCheckout");
+
+let selectedProduct = null;
+
+// OPEN MODAL
+buyBtns.forEach(btn => {
+  btn.addEventListener("click", (e) => {
+
+    const card = e.target.closest(".card");
+
+    const name = card.querySelector("h3").innerText;
+    const price = parseFloat(card.querySelector(".price").dataset.price);
+
+    selectedProduct = { name, price };
+
+    buyProductName.innerText = name;
+    buyProductPrice.innerText = price.toFixed(2);
+
+    buyModal.classList.add("active");
+  });
+});
+
+// CLOSE
+closeBuyNow.addEventListener("click", () => {
+  buyModal.classList.remove("active");
+});
+
+// WHATSAPP ORDER
+buyWhatsapp.addEventListener("click", () => {
+
+  if (!selectedProduct) return;
+
+  const name = buyName.value.trim();
+  const phone = buyPhone.value.trim();
+  const address = buyAddress.value.trim();
+  const city = buyCity.value.trim();
+
+  if (!name || !phone || !address || !city) {
+    alert("Fill all billing details");
+    return;
+  }
+
+  let message = `🧾 *Quick Order – Firefly Electrical*\n\n`;
+  message += `👤 ${name}\n📞 ${phone}\n📍 ${address}, ${city}\n\n`;
+  message += `🛒 ${selectedProduct.name}\n`;
+  message += `💰 Rs. ${selectedProduct.price.toFixed(2)}`;
+
+  window.open(
+    `https://wa.me/94704000400?text=${encodeURIComponent(message)}`,
+    "_blank"
+  );
+});
+
+// CHECKOUT INVOICE
+buyCheckout.addEventListener("click", () => {
+
+  if (!selectedProduct) return;
+
+  const name = buyName.value.trim();
+  const phone = buyPhone.value.trim();
+  const address = buyAddress.value.trim();
+  const city = buyCity.value.trim();
+
+  if (!name || !phone || !address || !city) {
+    alert("Fill all billing details");
+    return;
+  }
+
+  // Replace cart with single product
+  cart = [selectedProduct];
+  updateCart();
+
+  document.getElementById("billName").value = name;
+  document.getElementById("billPhone").value = phone;
+  document.getElementById("billAddress").value = address;
+  document.getElementById("billCity").value = city;
+
+  buyModal.classList.remove("active");
+
+  document.querySelector(".checkout-btn").click();
+});
+buyModal.addEventListener("click", (e) => {
+  if (e.target === buyModal) {
+    buyModal.classList.remove("active");
+    document.body.classList.remove("buy-open");
+  }
+});
+function saveInvoiceToHistory(invoiceData) {
+
+  let history = JSON.parse(localStorage.getItem("fireflyInvoiceHistory")) || [];
+
+  history.push(invoiceData);
+
+  localStorage.setItem("fireflyInvoiceHistory", JSON.stringify(history));
+}
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener("click", function(e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute("href"));
+    target.scrollIntoView({
+      behavior: "smooth",
+      block: "start"
+    });
+  });
 });
