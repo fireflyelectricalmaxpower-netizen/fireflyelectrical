@@ -785,3 +785,231 @@ body.invoice-open > *:not(.invoice-overlay) {
   font-weight: bold;
   cursor: pointer;
 }
+/* BUY NOW MODAL */
+
+/* ===============================
+   APPLE STYLE BUY NOW MODAL
+================================ */
+
+.buy-modal {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.35s ease, visibility 0.35s ease;
+
+  z-index: 5000;
+}
+
+.buy-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+/* Background zoom effect */
+body.buy-open > *:not(.buy-modal) {
+  filter: blur(8px) scale(1.02);
+  transition: 0.4s ease;
+  pointer-events: none;
+}
+
+/* Modal Box */
+.buy-box {
+  width: 95%;
+  max-width: 420px;
+  padding: 30px 25px;
+
+  border-radius: 28px;
+
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+
+  border: 1px solid rgba(255,255,255,0.2);
+
+  box-shadow:
+    0 40px 80px rgba(0,0,0,0.6),
+    0 0 40px rgba(235,240,14,0.15);
+
+  transform: translateY(40px) scale(0.9);
+  opacity: 0;
+
+  transition: all 0.45s cubic-bezier(.65,-0.25,.25,1.35);
+}
+
+.buy-modal.active .buy-box {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+/* Header */
+.buy-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 18px;
+}
+
+.buy-header h3 {
+  font-weight: 600;
+  letter-spacing: 1px;
+}
+
+.buy-header button {
+  background: none;
+  border: none;
+  font-size: 22px;
+  color: #aaa;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.buy-header button:hover {
+  color: #fff;
+  transform: scale(1.2);
+}
+
+/* Inputs */
+.buy-billing input,
+.buy-billing textarea {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 14px;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: rgba(255,255,255,0.06);
+  color: #fff;
+  outline: none;
+  transition: 0.3s;
+}
+
+.buy-billing input:focus,
+.buy-billing textarea:focus {
+  border-color: #ebf00e;
+  box-shadow: 0 0 20px rgba(235,240,14,0.3);
+}
+
+/* Buttons */
+.buy-green,
+.buy-yellow {
+  width: 100%;
+  padding: 14px;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 15px;
+  transition: 0.3s;
+}
+
+.buy-green {
+  background: #25D366;
+  border: none;
+}
+
+.buy-yellow {
+  background: #ebf00e;
+  color: #000;
+  border: none;
+  margin-top: 10px;
+}
+
+.buy-green:hover,
+.buy-yellow:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.5);
+}
+
+
+.buy-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.buy-box {
+  background: #111;
+  padding: 25px;
+  border-radius: 15px;
+  width: 95%;
+  max-width: 400px;
+  border: 1px solid rgba(255,255,255,0.1);
+}
+
+.buy-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 15px;
+}
+
+.buy-header button {
+  background: none;
+  border: none;
+  font-size: 20px;
+  color: #fff;
+  cursor: pointer;
+}
+
+.buy-product {
+  margin-bottom: 15px;
+}
+
+.buy-billing input,
+.buy-billing textarea {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 10px;
+  background: #222;
+  border: 1px solid #333;
+  color: #fff;
+  border-radius: 8px;
+}
+
+.buy-green {
+  width: 100%;
+  padding: 12px;
+  background: #25D366;
+  border: none;
+  border-radius: 30px;
+  margin-top: 5px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.buy-yellow {
+  width: 100%;
+  padding: 12px;
+  background: #ebf00e;
+  border: none;
+  border-radius: 30px;
+  margin-top: 10px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+
+.old-price {
+  color: #fdffa0;
+  text-decoration: line-through;
+  font-size: 14px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  overflow-x: hidden; /* prevents side scroll */
+  -webkit-overflow-scrolling: touch; /* smoother on mobile */
+}
+.products-container {
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+* {
+  scroll-margin-top: 80px; /* useful if you have fixed header */
+}
