@@ -140,7 +140,7 @@ startInterval();
 
     // Wait so browser shows it
     setTimeout(() => {
-      window.location.href = "led-bulbs.html";
+      window.location.href = "dec-lamps.html";
     }, 1500);
 
   });
@@ -153,7 +153,7 @@ startInterval();
 
     // Wait so browser shows it
     setTimeout(() => {
-      window.location.href = "led-bulbs.html";
+      window.location.href = "dec.lamps.html";
     }, 1500);
 
   });
@@ -314,4 +314,3 @@ function handleSwipe() {
 
   window.addEventListener("scroll", revealSections);
   window.addEventListener("load", revealSections);
-
