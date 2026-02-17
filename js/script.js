@@ -153,7 +153,7 @@ startInterval();
 
     // Wait so browser shows it
     setTimeout(() => {
-      window.location.href = "dec.lamps.html";
+      window.location.href = "ele-appliances.html";
     }, 1500);
 
   });
@@ -166,7 +166,7 @@ startInterval();
 
     // Wait so browser shows it
     setTimeout(() => {
-      window.location.href = "products.html";
+      window.location.href = "solar-power.html";
     }, 1500);
 
   });
@@ -179,7 +179,7 @@ startInterval();
 
     // Wait so browser shows it
     setTimeout(() => {
-      window.location.href = "products.html";
+      window.location.href = "panel-lights.html";
     }, 1500);
 
   });
