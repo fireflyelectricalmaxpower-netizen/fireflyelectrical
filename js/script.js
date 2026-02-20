@@ -77,15 +77,22 @@ function updateDots(index) {
 /* FADE SLIDE */
 function fadeBg() {
   const nextSlide = currentSlide === 0 ? 1 : 0;
+
   imageIndex = (imageIndex + 1) % images.length;
 
+  // Set next image
   slides[nextSlide].style.backgroundImage =
     `url(${images[imageIndex]})`;
 
+  // Bring next slide on top (fade in)
   slides[nextSlide].classList.add("active");
-  slides[currentSlide].classList.remove("active");
 
-  currentSlide = nextSlide;
+  // Fade out current slide AFTER next is visible
+  setTimeout(() => {
+    slides[currentSlide].classList.remove("active");
+    currentSlide = nextSlide;
+  }, 100); // overlap time = smooth blend
+
   updateDots(imageIndex);
 }
 
@@ -185,7 +192,7 @@ startInterval();
   });
 
   const fireflyContainer = document.querySelector(".firefly-container");
-  const FIREFLY_COUNT = 20;
+  const FIREFLY_COUNT = 10;
 
   for (let i = 0; i < FIREFLY_COUNT; i++) {
     const firefly = document.createElement("div");
@@ -210,7 +217,7 @@ startInterval();
   const catalogs = document.querySelector(".catalogs");
   const container = catalogs.querySelector(".firefly-container");
 
-  const COUNT = 24;
+  const COUNT = 12;
 
   for (let i = 0; i < COUNT; i++) {
     const f = document.createElement("div");
@@ -310,6 +317,20 @@ function handleSwipe() {
   }
 }
 
+const reveals = document.querySelectorAll(".reveal");
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add("active");
+      observer.unobserve(entry.target);
+    }
+  });
+}, {
+  threshold: 0.15
+});
+
+reveals.forEach(el => observer.observe(el));
 
 
   window.addEventListener("scroll", revealSections);
