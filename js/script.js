@@ -88,10 +88,10 @@ function fadeBg() {
   slides[nextSlide].classList.add("active");
 
   // Fade out current slide AFTER next is visible
-  setTimeout(() => {
-    slides[currentSlide].classList.remove("active");
-    currentSlide = nextSlide;
-  }, 100); // overlap time = smooth blend
+setTimeout(() => {
+  slides[currentSlide].classList.remove("active");
+  currentSlide = nextSlide;
+}, 800);
 
   updateDots(imageIndex);
 }
